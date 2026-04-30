@@ -4,3 +4,15 @@ from datetime import datetime
 from typing import Protocol, runtime_checkable
 
 from app.services.util import generate_unique_id
+
+
+class NotificationError(Exception):
+    pass
+
+
+class ChannelUnavailableError(NotificationError):
+    pass
+
+
+class DeliveryError(NotificationError):
+    pass
