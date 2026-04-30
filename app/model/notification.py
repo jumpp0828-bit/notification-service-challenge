@@ -61,3 +61,16 @@ class FileChannel(NotificationChannel):
             return True
 
         return False
+
+    def get_channel_name(self) -> str:
+        return f"file:{self.file_path}"
+
+    def send(self, message: str) -> None:
+        if not self.is_available():
+            raise ChannelUnavailableError(f"File channel not available: {self.file_path}")
+
+    try:
+        with open(self.file_path, "a", encoding="utf-8") as f:
+            f.write(message + "\n")
+    except Exception as e:
+        raise DeliveryError(f"Error writing to file: {e}")
