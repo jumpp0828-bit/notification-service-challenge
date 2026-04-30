@@ -44,3 +44,20 @@ class ConsoleChannel(NotificationChannel):
 
     def is_available(self) -> bool:
         return True
+
+class FileChannel(NotificationChannel):
+
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+
+    def is_available(self) -> bool:
+        directory = os.path.dirname(self.file_path) or "."
+
+        if os.path.isdir(directory) and os.access(directory, os.W_OK):
+            return True
+
+
+        if os.path.isfile(self.file_path) and os.access(self.file_path, os.W_OK):
+            return True
+
+        return False
