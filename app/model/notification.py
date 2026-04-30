@@ -102,3 +102,8 @@ class NotificationService:
 
         self._channel.send(message)
         self._history.append(message)
+
+    def send_bulk(self, messages: list[str]) -> int:
+        success_count = 0
+
+        for msg in messages:
