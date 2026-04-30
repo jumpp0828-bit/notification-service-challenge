@@ -78,11 +78,11 @@ class FileChannel(NotificationChannel):
 
 class MockChannel(NotificationChannel):
 
-    def send(self, message: str):
+    def send(self, message: str) -> None:
         raise ChannelUnavailableError("Mock channel is not available")
 
     def get_channel_name(self) -> str:
         return "mock"
 
     def is_available(self) -> bool:
-        return True
+        return False
