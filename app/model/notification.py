@@ -74,3 +74,15 @@ class FileChannel(NotificationChannel):
             f.write(message + "\n")
     except Exception as e:
         raise DeliveryError(f"Error writing to file: {e}")
+
+
+class MockChannel(NotificationChannel):
+
+    def send(self, message: str):
+        raise ChannelUnavailableError("Mock channel is not available")
+
+    def get_channel_name(self) -> str:
+        return "mock"
+
+    def is_available(self) -> bool:
+        return True
